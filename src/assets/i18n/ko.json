@@ -1,0 +1,21 @@
+{
+  "Common": {
+    "Register": "등록",
+    "Add": "추가",
+    "Motify": "수정"
+  },
+  "ContentEditor": {
+    "Register": "공연 등록",
+    "Labels": {
+      "Category": "카테고리",
+      "Title": "제목",
+      "Author": "작가",
+      "Description": "작품 설명",
+      "ContentsLength": "컨텐츠 용량",
+      "RunningTime": "컨텐츠 길이",
+      "RecordedLocation": "촬영 장소",
+      "RecordedTimestamp": "촬영 시기",
+      "Files": "파일 업로드"
+    }
+  }
+}

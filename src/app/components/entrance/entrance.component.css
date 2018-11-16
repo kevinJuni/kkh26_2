@@ -1,0 +1,9 @@
+
+.container {
+  height: 100vh;
+}
+
+mat-card {
+  padding: 1rem;
+  margin: 1rem;
+}

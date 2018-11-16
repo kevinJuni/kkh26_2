@@ -1,0 +1,10 @@
+{
+  "ApplicationTitle": "SAC on VR",
+  "Navi":{
+    "ContentsManager": "Contents",
+    "SettingsManager": "Settings",
+    "CategoryManager": "Contents Categories",
+    "ManagersManager": "Managers",
+    "SignOut": "Sign Out"
+  }
+}

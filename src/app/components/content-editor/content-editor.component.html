@@ -1,0 +1,63 @@
+
+<mat-card>
+  <mat-card-title>{{'ContentEditor.Register'|translate}}</mat-card-title>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    
+    <form fxLayout="column" fxLayoutAlign=" stretch">
+      <mat-form-field>
+        <mat-select placeholder="{{'ContentEditor.Labels.Category'|translate}}">
+          <mat-option value="option">Option</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="{{'ContentEditor.Labels.Title'|translate}}" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="{{'ContentEditor.Labels.Author'|translate}}" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea matInput rows="5" placeholder="{{'ContentEditor.Labels.Description'|translate}}"></textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="{{'ContentEditor.Labels.RunningTime'|translate}}" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="{{'ContentEditor.Labels.ContentsLength'|translate}}" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput placeholder="{{'ContentEditor.Labels.RecordedLocation'|translate}}" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker"
+          placeholder="{{'ContentEditor.Labels.RecordedTimestamp'|translate}}" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <div>
+        <fa-layers [fixedWidth]="true">
+          <fa-icon icon="folder-open" size="5x"></fa-icon>
+          <fa-layers-text content="Yo" style="color: white;" transform="shrink-4"></fa-layers-text>
+        </fa-layers>
+      </div>
+
+<cdk-virtual-scroll-viewport [itemSize]="18 * 7" class="example-viewport">
+  <div *cdkVirtualFor="let item of files;" [class.example-alternate]="odd">
+    <div class="example-item-detail">Item: {{item}}</div>
+  </div>
+</cdk-virtual-scroll-viewport>
+
+      <button mat-flat-button color="primary">
+        {{'Common.Register'|translate}}
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

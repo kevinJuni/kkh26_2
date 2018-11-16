@@ -1,0 +1,19 @@
+<mat-toolbar class="header" fxLayout="row" fxLayoutAlign="space-between center">
+  <span>{{'Navi.ContentsManager'|translate}}</span>
+
+  <button mat-button routerLink="/">{{'ContentEditor.Register'|translate}}</button>
+</mat-toolbar>
+
+<div fxLayout="row wrap">
+  <mat-card class="contents-card" (click)="edit(item)" *ngFor="let item of items">
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="contents title" />      
+  </mat-card>
+
+  <mat-card class="contents-card">
+    <mat-card-content fxFill fxLayoutAlign="center">
+      <button mat-button>
+        <fa-icon icon="plus" size="4x"></fa-icon>
+      </button>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,28 @@
+<div class="container" fxLayout="column" fxLayoutAlign="center center">
+<mat-card>
+  <mat-card-content fxLayout="column">
+    <form class="editor">
+      <mat-form-field>
+        <mat-label>{{'ContentEditor.Labels.Category'|translate}}</mat-label>
+        <input matInput [formControl]="editor">
+        <mat-hint *ngIf="lastNameAutofilled">Autofilled!</mat-hint>
+      </mat-form-field>
+      <button mat-stroked-button (click)="add()">{{'Common.Add'|translate}}</button>  
+    </form>
+    
+  </mat-card-content>
+</mat-card>
+  
+</div>
+
+
+<section fxLayout="row" fxLayoutAlign="center">
+  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let item of movies" cdkDrag>
+      <div>{{item}}</div>
+      <button mat-icon-button color="warn" (click)="remove(item)">
+        <i class="material-icons">clear</i>
+      </button>
+    </div>
+  </div>
+</section>
