@@ -14,6 +14,7 @@ library.add(faCoffee, faPlus, faFolderOpen);
 import {
   MatDialogModule,
   MatCardModule,
+  MatListModule,
   MatFormFieldModule,
   MatInputModule, MatDatepickerModule, MatNativeDateModule,
   MatSelectModule,
@@ -21,6 +22,7 @@ import {
   MatToolbarModule, MatMenuModule,
   MatIconModule,
   MatDividerModule,
+  MatTooltipModule,
   MatButtonModule, MatCheckboxModule
 } from '@angular/material';
 
@@ -29,6 +31,7 @@ import {
     FlexLayoutModule,
     MatDialogModule,
     MatCardModule,
+    MatListModule,
     MatFormFieldModule,
     MatInputModule,MatDatepickerModule, MatNativeDateModule,
     MatSelectModule,
@@ -36,8 +39,9 @@ import {
     MatToolbarModule, MatMenuModule,
     MatIconModule,
     MatDividerModule,
+    MatTooltipModule,
     MatButtonModule, MatCheckboxModule,
-    DragDropModule, ScrollDispatchModule
+    DragDropModule, ScrollDispatchModule,
   ],
 })
 export class CustomMaterialModule { }

@@ -5,6 +5,10 @@
 }
 .contents-card {
   margin: .5rem;
-  width: 10rem;
-  height: 16rem;
+  width: 15rem;
+}
+
+.contents-card img {
+  width: 15rem;
+  height: 8rem;
 }

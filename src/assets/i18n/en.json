@@ -1,4 +1,7 @@
 {
+  "Common": {
+    "Browse": "Browse"
+  },
   "ApplicationTitle": "SAC on VR",
   "Navi":{
     "ContentsManager": "Contents",

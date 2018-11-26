@@ -5,8 +5,12 @@
 </mat-toolbar>
 
 <div fxLayout="row wrap">
-  <mat-card class="contents-card" (click)="edit(item)" *ngFor="let item of items">
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="contents title" />      
+  <mat-card class="contents-card"
+    fxlayout="column" fxlayoutalign="center center"
+    (click)="edit(item)" *ngFor="let item of list.items">
+    <img mat-card-image
+      [src]="item.banner"
+      alt="contents title" />
   </mat-card>
 
   <mat-card class="contents-card">

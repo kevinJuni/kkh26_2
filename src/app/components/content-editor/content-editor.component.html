@@ -4,60 +4,56 @@
   <mat-divider></mat-divider>
   <mat-card-content>
     
-    <form fxLayout="column" fxLayoutAlign=" stretch">
+    <form fxLayout="column" fxLayoutAlign=" stretch" [formGroup]="editor">
       <mat-form-field>
-        <mat-select placeholder="{{'ContentEditor.Labels.Category'|translate}}">
-          <mat-option value="option">Option</mat-option>
+        <mat-select
+          formControlName="category"
+          placeholder="{{'ContentEditor.Labels.Category'|translate}}">
+          <mat-option *ngFor="let cat of categories"
+            [value]="cat.id">{{cat.name}}</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="{{'ContentEditor.Labels.Title'|translate}}" />
+        <input matInput formControlName="title" placeholder="{{'ContentEditor.Labels.Title'|translate}}" />
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="{{'ContentEditor.Labels.Author'|translate}}" />
+        <input matInput formControlName="author" placeholder="{{'ContentEditor.Labels.Author'|translate}}"  />
       </mat-form-field>
 
       <mat-form-field>
-        <textarea matInput rows="5" placeholder="{{'ContentEditor.Labels.Description'|translate}}"></textarea>
+        <textarea matInput formControlName="description" rows="5" placeholder="{{'ContentEditor.Labels.Description'|translate}}"></textarea>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="{{'ContentEditor.Labels.RunningTime'|translate}}" />
+        <input type="number" matInput placeholder="{{'ContentEditor.Labels.RunningTime'|translate}}"
+          formControlName="runningTime" />
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="{{'ContentEditor.Labels.ContentsLength'|translate}}" />
+        <input matInput readonly formControlName="length"
+          placeholder="{{'ContentEditor.Labels.ContentsLength'|translate}}" />
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput placeholder="{{'ContentEditor.Labels.RecordedLocation'|translate}}" />
+        <input matInput formControlName="recordedLocation"
+          placeholder="{{'ContentEditor.Labels.RecordedLocation'|translate}}" />
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput [matDatepicker]="picker"
+        <input matInput [matDatepicker]="picker" formControlName="recordedAt"
           placeholder="{{'ContentEditor.Labels.RecordedTimestamp'|translate}}" />
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
 
-      <div>
-        <fa-layers [fixedWidth]="true">
-          <fa-icon icon="folder-open" size="5x"></fa-icon>
-          <fa-layers-text content="Yo" style="color: white;" transform="shrink-4"></fa-layers-text>
-        </fa-layers>
-      </div>
+      <app-file-drop #uploader (totalLengthUpdated)="updateTotalSize($event)"></app-file-drop>
 
-<cdk-virtual-scroll-viewport [itemSize]="18 * 7" class="example-viewport">
-  <div *cdkVirtualFor="let item of files;" [class.example-alternate]="odd">
-    <div class="example-item-detail">Item: {{item}}</div>
-  </div>
-</cdk-virtual-scroll-viewport>
-
-      <button mat-flat-button color="primary">
+      <button mat-flat-button color="primary" (click)="submit()">
         {{'Common.Register'|translate}}
       </button>
     </form>
   </mat-card-content>
 </mat-card>
+<pre>{{editor.value|json}}</pre>

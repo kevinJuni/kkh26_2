@@ -1,0 +1,146 @@
+
+.file-drop {
+  height: 2rem;
+  padding: 2rem;
+}
+
+.layered-text {
+  color: white;
+  font-size: 1.3rem;
+  text-shadow: 1px 1px 2px black, 0 0 25px #e91e63, 0 0 10px darkblue;
+}
+.ml-2 {
+  margin-left: 2rem;
+}
+
+
+$blue: #13EBFF;
+$green: #6CEFBD;
+$red: #FF7080;
+$yellow: #FFE28B;
+
+$text: #8793A2;
+$text-light: #C0C4C7;
+$border: #D2D6DA;
+$upload-box-background: #2C3139;
+$upload-box-header-background: #3A414A;
+$upload-box-progress-background: #3A4048;
+
+.upload-box{
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  border-radius: 10px;
+  background: $upload-box-background;
+
+
+  .upload-box-content{
+    .upload-item, .drop-container{
+      width: 100%;
+      height: 5.5rem;
+      box-shadow: dinset 0 20px 20px -20px rgba(0,0,0,0.6);
+    }
+
+    .drop-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      p{
+        font-size: 16px;
+        font-weight: 400;
+        color: $text;
+      }
+
+      .upload-button {
+        display: inline-block;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        font-weight: 600;
+        padding: 0 2px;
+
+        input {
+          display: none;
+        }
+      }
+    }
+
+    .upload-item {
+      display: flex;
+      align-items: center;
+      /*padding: 0 30px;*/
+
+      .upload-item-content {
+        width: 100%;
+        .filename {
+          display: flex;
+          align-items: center;
+          padding: 0 2rem;
+          i{
+            color: $text;
+            opacity: .8;
+            font-size: 24px;
+          }
+          span {
+            color: $text;
+            font-size: 14px;
+            font-weight: 400;
+            margin: 0 .5rem;
+          }
+        }
+        .progress-content {
+          display: flex;
+          align-items: center;
+          margin: 10px 30px;
+          .progress {
+            display: block;
+            position: relative;
+            width: 100%;
+            height: 10px;
+            border-radius: 10px;
+            background: $upload-box-progress-background;
+            .bar {
+              position: absolute;
+              top: 0;
+              left: 0;
+              height: 10px;
+              background: linear-gradient(90deg, rgba(19,235,255,1) 0%, rgba(108,239,189,1) 100%);
+
+              &.is-done {
+                background: $green;
+              }
+            }
+          }
+        }
+        
+
+        .progress-text-content {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin: 10px 30px 0;
+
+          .progress-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: $blue;
+            transition: color 200ms ease-out;
+
+            &.is-done {
+              color: $green;
+            }
+          }
+
+          .speed-and-eta-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: $text;
+          }
+        }
+      }
+    }
+  }
+
+
+}

@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>{{data.title|translate}}</h1>
+<div mat-dialog-content>
+  <p>
+    {{data.prompt |translate}} : {{data.target}}
+  </p>
+</div>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
+  <button mat-raised-button mat-dialog-close="yes" color="primary">
+    {{'Common.Yes'|translate}}
+  </button>
+  <button mat-raised-button mat-dialog-close="no" cdkFocusInitial>
+    {{'Common.No'|translate}}
+  </button>
+</div>

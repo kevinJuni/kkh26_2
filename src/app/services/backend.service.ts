@@ -98,8 +98,8 @@ export class PageParamImpl {
 }
 
 export interface ListResponse<T> {
-  list: T[];
-  total: number;
+  items: T[];
+  count: number;
   per_page: number;
 }
 

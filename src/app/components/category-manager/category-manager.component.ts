@@ -1,6 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { BinarySelectComponent } from 'app/dialog-components/binary-select/binary-select.component';
+
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
+import { Category } from 'app/models';
+import { ContentsService } from 'app/services/contents.service';
+import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-category-manager',
@@ -8,31 +18,53 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./category-manager.component.css']
 })
 export class CategoryManagerComponent implements OnInit {
-  movies = [
-    'Episode I - The Phantom Menace',
-    'Episode II - Attack of the Clones',
-    'Episode III - Revenge of the Sith',
-    'Episode IV - A New Hope',
-    'Episode V - The Empire Strikes Back',
-    'Episode VI - Return of the Jedi',
-    'Episode VII - The Force Awakens',
-    'Episode VIII - The Last Jedi'
-  ];
 
-  editor: FormControl
-  files = [];
+  items: Category[] = [];
+  editor: FormControl;
+  inAction = false;
 
   constructor(
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private dialog: MatDialog,
+    private toaster: ToastrService,
+    private translate: TranslateService,
+    private backend: ContentsService
   ) { 
     this.editor = this.fb.control('', Validators.required);
   }
 
   ngOnInit() {
+    this.reload();
+  }
+
+
+  reload (): void {
+    this.backend.getCategories().pipe(
+      catchError(this.onError.bind(this))
+    ).subscribe(res => {
+      this.items = res.items;
+    });
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.movies, event.previousIndex, event.currentIndex);
+    this.inAction = true;
+
+    moveItemInArray(this.items, event.previousIndex, event.currentIndex);
+    for (var i = 0; i < this.items.length; i++) {
+      this.items[i].sorting = i;
+    }
+
+    this.backend.updateCategoriesSorting(this.items).subscribe(res => {
+      this.inAction = false;
+    }, error => {
+      this.translate.get('Alert.CommonError').subscribe(errorMsg => {
+        this.toaster.error(errorMsg, 'error!');
+
+        //rollback
+        //moveItemInArray(this.items, event.currentIndex, event.previousIndex);
+      });
+      this.inAction = false;
+    });
   }
 
 
@@ -40,13 +72,43 @@ export class CategoryManagerComponent implements OnInit {
     if (this.editor.invalid) {
       return;
     }
+    this.inAction = true;
+    var newOne = new Category(0, this.editor.value, this.items.length);
 
-    this.movies.push(this.editor.value);
-    this.editor.reset();
-
+    this.backend.addCategory(newOne).subscribe(res => {
+      this.items.push(newOne);
+      this.editor.reset();
+      this.inAction = false;
+    }, this.onError.bind(this));
   }
 
-  remove (item) {
-    this.movies.splice(this.movies.indexOf(item), 1);
+  remove (item: Category) {
+    var dialog = this.dialog.open(BinarySelectComponent, {
+      width: '300px',
+      data: {
+        title: 'Common.Confirm',
+        prompt: 'Prompt.ConfirmRemove',
+        target: item.name
+      }
+    });
+
+    dialog.afterClosed().subscribe(res => {
+      if (res != 'yes')
+        return;
+
+      this.backend.removeCategory(item).subscribe(result => {
+        this.items.splice(this.items.indexOf(item), 1);
+      }, this.onError.bind(this));
+
+    });
+  }
+
+
+  onError (error) {
+    this.inAction = false;
+    this.translate.get('Alert.CommonError').subscribe(errorMsg => {
+      this.toaster.error(errorMsg, 'error!');
+    });    
+    return Observable.create({});
   }
 }
