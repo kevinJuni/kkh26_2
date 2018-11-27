@@ -23,6 +23,7 @@ import {
   MatIconModule,
   MatDividerModule,
   MatTooltipModule,
+  MatPaginatorModule,
   MatButtonModule, MatCheckboxModule
 } from '@angular/material';
 
@@ -40,6 +41,7 @@ import {
     MatIconModule,
     MatDividerModule,
     MatTooltipModule,
+    MatPaginatorModule,
     MatButtonModule, MatCheckboxModule,
     DragDropModule, ScrollDispatchModule,
   ],

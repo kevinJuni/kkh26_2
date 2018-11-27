@@ -54,8 +54,11 @@ export class ContentsService {
     return this.http.post(this.backend, data);
   }
 
-  getList () {
-    return this.http.get<ListResponse<ContentBrief>>(this.backend);
+  getList (query?: any, offset?: number, perPage?: number) {
+    return this.http.get<ListResponse<ContentBrief>>(this.backend, {params: {
+      offset: offset.toString(),
+      page_size: perPage.toString()
+    }});
   }
 
   getDetail (id: number) {

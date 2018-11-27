@@ -40,6 +40,7 @@
     "CommonError": "오류가 발생했습니다."
   },
   "Prompt": {
-    "ConfirmRemove": "삭제하시겠습니까?"
+    "ConfirmRemove": "삭제하시겠습니까?",
+    "ConfirmModify": "수정하시겠습니까?"
   }
 }

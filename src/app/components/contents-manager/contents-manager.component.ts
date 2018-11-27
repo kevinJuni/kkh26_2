@@ -18,8 +18,7 @@ export class ContentsManagerComponent implements OnInit {
 
   list = new PagedList();
   iconAddNew = faPlus;
-
-  items = [1,2,3,4,5,6,7,8,9];
+  pageSizeOptions: number[] = [20, 50, 100];
 
   constructor(
     private toaster: ToastrService,
@@ -44,8 +43,11 @@ export class ContentsManagerComponent implements OnInit {
     });
   }
 
-  reload () {
-    this.contents.getList().subscribe(
+  reload ($event?) {
+    let offset = $event? $event.pageIndex * $event.pageSize : 0;
+    let perPage = $event? $event.pageSize : this.pageSizeOptions[0];
+
+    this.contents.getList(null, offset, perPage).subscribe(
       this.onListLoaded.bind(this),
       this.onError.bind(this)
     );

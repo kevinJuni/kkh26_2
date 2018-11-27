@@ -68,10 +68,25 @@ export class ContentDetailComponent implements OnInit {
   }
 
   submit () {
-    this.editor.submit().subscribe(
-      this.onPostingComplete.bind(this),
-      this.onError.bind(this)
-    );
+    if (!this.modeNew) {
+      this.dialogs.open(BinarySelectComponent, {
+        width: '300px',
+        data: {
+          title: 'Common.Confirm',
+          prompt: 'Prompt.ConfirmModify',
+          target: this.content.title
+        }
+      }).afterClosed().subscribe(selection => {
+        if (selection !== 'yes') {
+          return;
+        }
+      });
+    } else {
+      this.editor.submit().subscribe(
+        this.onPostingComplete.bind(this),
+        this.onError.bind(this)
+      );
+    }
   }
 
 }

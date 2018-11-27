@@ -6,6 +6,13 @@
   </button>
 </mat-toolbar>
 
+<mat-paginator
+  [length]="list.totalCount"
+  [pageSize]="list.perPage"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="reload($event)">
+</mat-paginator>
+
 <div fxLayout="row wrap">
   <mat-card class="contents-card" (click)="showEditor(item)"
     fxlayout="column" fxlayoutalign="center center"
