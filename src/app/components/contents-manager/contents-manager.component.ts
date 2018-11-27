@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { ContentsService, ContentBrief } from 'app/services/contents.service';
+import { ContentsService } from 'app/services/contents.service';
 import { PagedList } from 'app/services';
 import { ListResponse } from 'app/services/backend.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
+import { MatDialog } from '@angular/material';
+import { ContentDetailComponent } from '../content-detail/content-detail.component';
+import { ContentBrief } from 'app/models';
 
 @Component({
   selector: 'app-contents-manager',
@@ -21,18 +24,12 @@ export class ContentsManagerComponent implements OnInit {
   constructor(
     private toaster: ToastrService,
     private translate: TranslateService,
+    private dialogs: MatDialog,
     private contents: ContentsService
   ) { }
 
   ngOnInit() {
-    this.contents.getList().subscribe(
-      this.onListLoaded.bind(this),
-      this.onError.bind(this)
-    );
-  }
-
-  edit (item: any): void {
-
+    this.reload();
   }
 
   onListLoaded (res: ListResponse<ContentBrief>) {
@@ -44,7 +41,29 @@ export class ContentsManagerComponent implements OnInit {
     this.translate.get('Alert.CommonError').subscribe(errorMsg => {
       this.toaster.error(errorMsg, 'error!');
       console.error(error);
-    });   
+    });
+  }
+
+  reload () {
+    this.contents.getList().subscribe(
+      this.onListLoaded.bind(this),
+      this.onError.bind(this)
+    );
+  }
+
+  showEditor (item?: ContentBrief) {
+    const dialog = this.dialogs.open(ContentDetailComponent, {
+      width: '50vw',
+      data: item || {}
+    });
+
+    dialog.afterClosed().subscribe(res => {
+      if (res !== 'remove') {
+        return;
+      }
+
+      this.contents.remove(item.id).subscribe(_ => this.reload());
+    });
   }
 
 }

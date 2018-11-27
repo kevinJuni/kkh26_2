@@ -1,3 +1,22 @@
-<p>
-  content-detail works!
-</p>
+<h2 mat-dialog-title>
+  <div *ngIf="!modeNew">{{'ContentEditor.Detail'|translate}}</div>
+  <div *ngIf="modeNew">{{'ContentEditor.Register'|translate}}</div>
+</h2>
+<div mat-dialog-content>
+  <app-content-editor #editor></app-content-editor>
+  <app-asset-list [owner]="content" [(ngModel)]="content.assets" *ngIf="content"></app-asset-list>
+</div>
+
+
+<div mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" (click)="editor.submit()">
+    {{'Common.Confirm'|translate}}
+  </button>
+  <button mat-raised-button color="warn"
+    *ngIf="!modeNew" (click)="remove()">
+    {{'Common.Remove'|translate}}
+  </button>
+  <button mat-raised-button mat-dialog-close cdkFocusInitial>
+    {{'Common.Close'|translate}}
+  </button>
+</div>

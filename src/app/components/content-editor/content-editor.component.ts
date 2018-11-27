@@ -1,15 +1,13 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContentsService } from 'app/services/contents.service';
-import { ToastrService } from 'ngx-toastr';
+import { humanizeBytes } from 'ngx-uploader';
 
-import { switchMap, merge, combineLatest } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
+import { forkJoin, throwError } from 'rxjs';
 
 import { Category, Content } from 'app/models';
-import { TranslateService } from '@ngx-translate/core';
 import { FileDropComponent } from '../file-drop/file-drop.component';
-import { Observable, Subscription, forkJoin, throwError } from 'rxjs';
-import { humanizeBytes } from 'ngx-uploader';
 
 @Component({
   selector: 'app-content-editor',
@@ -29,9 +27,7 @@ export class ContentEditorComponent implements OnInit, OnDestroy {
 
   constructor(
     private fb: FormBuilder,
-    private translate: TranslateService,
     private backend: ContentsService,
-    private toaster: ToastrService
   ) {
     this.makeForm();
   }
@@ -43,14 +39,17 @@ export class ContentEditorComponent implements OnInit, OnDestroy {
     };
     this.backend.getCategories().subscribe(res => {
       this.categories = res.items;
-    }, this.onError.bind(this));
+      return res;
+    });
   }
 
   ngOnDestroy () {
   }
+  
 
   makeForm () {
     this.editor = this.fb.group({
+      id: '',
       category: ['', Validators.required],
       title: ['', Validators.required],
       author: ['', Validators.required],
@@ -58,8 +57,17 @@ export class ContentEditorComponent implements OnInit, OnDestroy {
       recordedLocation: '',
       description: ['', Validators.required],
       runningTime: [0, Validators.required],
-      length: 0
+      length: 0,
+      assets: [[]]
     });
+  }
+
+  setModel (data: Content) {
+    let copy = Object.assign({}, data);
+    copy.category = (<Category>copy.category).id;
+    this.editor.setValue(copy);
+
+    this.editor.controls.length.setValue(humanizeBytes(data.length));
   }
 
 
@@ -69,7 +77,7 @@ export class ContentEditorComponent implements OnInit, OnDestroy {
 
     var model = Content.from(this.editor.value);
 
-    this.backend.verifyContent(model).pipe(
+    return this.backend.verifyContent(model).pipe(
       switchMap(res => {
         if (res.response !== 'ok')
           return throwError(res);
@@ -84,15 +92,7 @@ export class ContentEditorComponent implements OnInit, OnDestroy {
 
         return this.backend.addContent(model);
       })
-    ).subscribe(
-      this.onPostingComplete.bind(this),
-      this.onError.bind(this)
     );
-  }
-
-  onPostingComplete (res) {
-    console.log('is done:')
-    console.log(res);
   }
 
   updateTotalSize($event) {
@@ -100,10 +100,4 @@ export class ContentEditorComponent implements OnInit, OnDestroy {
     this.editor.controls.length.setValue(output);
   }
 
-  onError (error) {
-    this.translate.get('Alert.CommonError').subscribe(errorMsg => {
-      this.toaster.error(errorMsg, 'error!');
-      console.error(error);
-    });   
-  }
 }

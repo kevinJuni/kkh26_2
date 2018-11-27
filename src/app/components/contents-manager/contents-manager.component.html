@@ -1,21 +1,23 @@
 <mat-toolbar class="header" fxLayout="row" fxLayoutAlign="space-between center">
   <span>{{'Navi.ContentsManager'|translate}}</span>
 
-  <button mat-button routerLink="/">{{'ContentEditor.Register'|translate}}</button>
+  <button mat-button (click)="showEditor()">
+    {{'ContentEditor.Register'|translate}}
+  </button>
 </mat-toolbar>
 
 <div fxLayout="row wrap">
-  <mat-card class="contents-card"
+  <mat-card class="contents-card" (click)="showEditor(item)"
     fxlayout="column" fxlayoutalign="center center"
-    (click)="edit(item)" *ngFor="let item of list.items">
+    *ngFor="let item of list.items">
     <img mat-card-image
       [src]="item.banner"
       alt="contents title" />
   </mat-card>
 
-  <mat-card class="contents-card">
+  <mat-card class="contents-card" matTooltip="{{'ContentEditor.Register'|translate}}">
     <mat-card-content fxFill fxLayoutAlign="center">
-      <button mat-button>
+      <button mat-button (click)="showEditor()">
         <fa-icon icon="plus" size="4x"></fa-icon>
       </button>
     </mat-card-content>

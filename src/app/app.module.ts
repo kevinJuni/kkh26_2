@@ -53,6 +53,8 @@ import { ContentDetailComponent } from './components/content-detail/content-deta
 import { SettingsManagerComponent } from './components/settings-manager/settings-manager.component';
 import { BinarySelectComponent } from './dialog-components/binary-select/binary-select.component';
 import { FileDropComponent } from './components/file-drop/file-drop.component';
+import { AssetListComponent } from './components/asset-list/asset-list.component';
+import { HumanizeBytesPipe } from './pipes/humanize-bytes.pipe';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -79,10 +81,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     CategoryManagerComponent,
     BinarySelectComponent,
     FileDropComponent,
+    AssetListComponent,
+    HumanizeBytesPipe,
   ],
   entryComponents: [
     CommonAlertComponent,
-    BinarySelectComponent
+    BinarySelectComponent,
+    ContentDetailComponent,
+    ContentEditorComponent,
   ],
   imports: [
     BrowserModule,

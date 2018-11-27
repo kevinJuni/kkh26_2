@@ -2,17 +2,20 @@
   "Common": {
     "Add": "추가",
     "Browse": "탐색",
+    "Close": "닫기",
     "Confirm": "확인",
     "Done": "완료",
     "Error": "오류",
     "Motify": "수정",
     "Register": "등록",
+    "Remove": "제거",
     "Purpose": "용도",
     "Yes": "예",
     "No": "아니오"
   },
   "ContentEditor": {
     "Register": "공연 등록",
+    "Detail": "공연 상세",
     "Labels": {
       "Category": "카테고리",
       "Title": "제목",

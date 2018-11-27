@@ -2,24 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
-import { Category, CreatedResponse, Content } from 'app/models';
+import {
+  Category, CreatedResponse, Content, AssetFile, ContentBrief, SimpleResponse
+} from 'app/models';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { toSnakeCaseDict, ListResponse } from './backend.service';
+import { toSnakeCaseDict, ListResponse, toCamelCaseDict } from './backend.service';
 
 interface ListResponseCategory{
   response: string;
   items: Category[];
-}
-
-interface SimpleResponse {
-  response: string;
-}
-
-export interface ContentBrief {
-  id: number;
-  name: string;
-  created_at: string;
 }
 
 @Injectable({
@@ -64,5 +56,24 @@ export class ContentsService {
 
   getList () {
     return this.http.get<ListResponse<ContentBrief>>(this.backend);
+  }
+
+  getDetail (id: number) {
+    return this.http.get<any>(`${this.backend}/${id}`).pipe(
+      map(res => Content.from(toCamelCaseDict(res.detail)))
+    );
+  }
+
+  removeAsset (content: Content, item: AssetFile) {
+    let uri = `${this.backend}/${content.id}/assets/${item.id}`;
+    return this.http.delete<any>(uri);
+  }
+
+  addAsset (content: Content, item: AssetFile) {
+
+  }
+
+  remove (id: number) {
+    return this.http.delete(`${this.backend}/${id}`);
   }
 }

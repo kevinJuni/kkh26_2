@@ -1,5 +1,6 @@
 
-export class Category {
+import { NumericIdentifier } from './common';
+export class Category implements NumericIdentifier {
   constructor(
     public id: number,
     public name: string,
@@ -12,7 +13,13 @@ export class Category {
 }
 
 
-export class Content {
+export interface ContentBrief extends NumericIdentifier {
+  id: number;
+  name: string;
+  created_at: string;
+}
+
+export class Content implements NumericIdentifier {
   constructor(
     public id: number,
     public category: Category| number,
@@ -41,14 +48,14 @@ export class AssetFile {
   constructor(
     public id: string, //GUID
     public contentType: string,
-    public nativeName: string,
+    public name: string,
     public length: number,
     public purposes: string| string[]
   ) {}
 
   static from (raw: any) {
     return new AssetFile(raw.id, raw.content_type,
-      raw.native_name, raw.length, raw.purposes);
+      raw.name, raw.length, raw.purposes);
   }
 
 }

@@ -1,0 +1,17 @@
+<mat-list>
+  <h3 mat-subheader>Assets</h3>
+  <mat-list-item *ngFor="let item of model">
+    <mat-icon mat-list-icon>attachment</mat-icon>
+    <h4 mat-line>
+      {{item.name}}
+    </h4>
+    <p mat-line>{{item.length| humanizeBytes}}</p>
+    <mat-icon mat-list-icon color="accent"
+      matTooltip="{{'ContentEditor.AssetPurposes.ListingBanner'|translate}}"
+      *ngIf="item.purposes.length">list_alt</mat-icon>
+    <button mat-icon-button color="warn" (click)="remove(item)"
+      matTooltip="{{'Common.Remove'|translate}}" matTooltipPosition="right">
+      <mat-icon>remove</mat-icon>
+    </button>
+  </mat-list-item>
+</mat-list>
