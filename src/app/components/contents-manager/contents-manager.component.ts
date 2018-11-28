@@ -60,11 +60,12 @@ export class ContentsManagerComponent implements OnInit {
     });
 
     dialog.afterClosed().subscribe(res => {
-      if (res !== 'remove') {
-        return;
+      if (res == 'remove') {
+        this.contents.remove(item.id).subscribe(_ => this.reload());
+      } else if (res === 'reload') {
+        this.reload();
       }
 
-      this.contents.remove(item.id).subscribe(_ => this.reload());
     });
   }
 

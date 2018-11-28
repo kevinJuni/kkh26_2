@@ -65,6 +65,8 @@ export class FileDropComponent {
   }
 
   get totalLength () {
+    if (this.files.length < 1)
+      return 0;
     return this.files
       .map(e => e.size)
       .reduce((acc, curr) => acc + curr);

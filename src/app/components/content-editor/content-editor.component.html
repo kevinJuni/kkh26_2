@@ -22,10 +22,7 @@
     <textarea matInput formControlName="description" rows="5" placeholder="{{'ContentEditor.Labels.Description'|translate}}"></textarea>
   </mat-form-field>
 
-  <mat-form-field>
-    <input type="number" matInput placeholder="{{'ContentEditor.Labels.RunningTime'|translate}}"
-      formControlName="runningTime" />
-  </mat-form-field>
+  <app-running-time formControlName="runningTime"></app-running-time>
 
   <mat-form-field>
     <input matInput readonly formControlName="length"

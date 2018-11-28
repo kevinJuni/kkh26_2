@@ -43,6 +43,7 @@ export class ContentDetailComponent implements OnInit {
   }
 
   onPostingComplete (res) {
+    this.dialogRef.close('reload');
   }
 
   onError (error) {
@@ -80,6 +81,10 @@ export class ContentDetailComponent implements OnInit {
         if (selection !== 'yes') {
           return;
         }
+        this.editor.submit().subscribe(
+          this.onPostingComplete.bind(this),
+          this.onError.bind(this)
+        );
       });
     } else {
       this.editor.submit().subscribe(

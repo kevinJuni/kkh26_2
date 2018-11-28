@@ -1,0 +1,11 @@
+<form fxLayout="row" [formGroup]="form" (change)="update($event)">
+  <mat-form-field>
+    <input matInput type="number" placeholder="Hour" formControlName="hours">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Minutes" formControlName="minutes">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="number" placeholder="Seconds" formControlName="seconds">
+  </mat-form-field>
+</form>

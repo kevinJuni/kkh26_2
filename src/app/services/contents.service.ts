@@ -79,4 +79,10 @@ export class ContentsService {
   remove (id: number) {
     return this.http.delete(`${this.backend}/${id}`);
   }
+
+  update (content: Content) {
+    let uri = `${this.backend}/${content.id}`;
+    let data = toSnakeCaseDict(content);
+    return this.http.put(uri, data);
+  }
 }

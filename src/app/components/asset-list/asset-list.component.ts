@@ -2,6 +2,8 @@ import { Component, Input, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { AssetFile, Content } from 'app/models';
 import { ContentsService } from 'app/services/contents.service';
+import { MatDialog } from '@angular/material';
+import { BinarySelectComponent } from 'app/dialog-components/binary-select/binary-select.component';
 
 @Component({
   selector: 'app-asset-list',
@@ -24,7 +26,10 @@ export class AssetListComponent implements ControlValueAccessor {
 
   model: AssetFile[];
 
-  constructor(private contents: ContentsService) { }
+  constructor(
+    private dialogs: MatDialog,
+    private contents: ContentsService
+  ) { }
 
 
   writeValue (value) {
@@ -38,10 +43,22 @@ export class AssetListComponent implements ControlValueAccessor {
   registerOnTouched () {}
 
   remove (item: AssetFile) {
-    this.contents.removeAsset(this.owner, item)
+    this.dialogs.open(BinarySelectComponent, {
+      width: '300px',
+      data: {
+        title: 'Common.Confirm',
+        prompt: 'Prompt.ConfirmRemove',
+        target: item.name
+      }
+    }).afterClosed().subscribe(res => {
+      if (res != 'yes')
+        return;
+
+      this.contents.removeAsset(this.owner, item)
       .subscribe(res => {
         let idx = this.model.indexOf(item);
         this.model.splice(idx, 1);
       });
+    });
   }
 }

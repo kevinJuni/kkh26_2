@@ -4,7 +4,7 @@ import { ContentsService } from 'app/services/contents.service';
 import { humanizeBytes } from 'ngx-uploader';
 
 import { switchMap, map } from 'rxjs/operators';
-import { forkJoin, throwError } from 'rxjs';
+import { forkJoin, throwError, of } from 'rxjs';
 
 import { Category, Content } from 'app/models';
 import { FileDropComponent } from '../file-drop/file-drop.component';
@@ -82,15 +82,23 @@ export class ContentEditorComponent implements OnInit, OnDestroy {
         if (res.response !== 'ok')
           return throwError(res);
 
-        return forkJoin(this.uploader.startUpload());
+        if (this.uploader.files.length)
+          return forkJoin(this.uploader.startUpload());
+        else
+          return of([]);
       }),
       switchMap(res => {
-        var errors = res.filter(e => !e.isDone);
-        if (errors.length)
-          return throwError(errors);
-        model.assets = res.map(e => e.asset);
+        if (res['length']) {
+          var errors = res.filter(e => !e.isDone);
+          if (errors.length)
+            return throwError(errors);
+          model.assets = res.map(e => e.asset).concat(model.assets);
+        }
 
-        return this.backend.addContent(model);
+        if (model.id)
+          return this.backend.update(model);
+        else
+          return this.backend.addContent(model);
       })
     );
   }

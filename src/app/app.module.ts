@@ -17,6 +17,7 @@ import { NgSpinKitModule } from 'ng-spin-kit';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TextMaskModule } from 'angular2-text-mask';
 
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 // material
 import { CustomMaterialModule } from './custom-material/custom-material.module';
@@ -55,6 +56,7 @@ import { BinarySelectComponent } from './dialog-components/binary-select/binary-
 import { FileDropComponent } from './components/file-drop/file-drop.component';
 import { AssetListComponent } from './components/asset-list/asset-list.component';
 import { HumanizeBytesPipe } from './pipes/humanize-bytes.pipe';
+import { RunningTimeComponent } from './components/running-time/running-time.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -83,6 +85,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FileDropComponent,
     AssetListComponent,
     HumanizeBytesPipe,
+    RunningTimeComponent,
   ],
   entryComponents: [
     CommonAlertComponent,
@@ -107,6 +110,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgSpinKitModule,
     ToastrModule.forRoot(),
     CustomMaterialModule,
+    NgxMaterialTimepickerModule.forRoot(),
     
     RouterModule.forRoot([
       { path: 'login', component: EntranceComponent },
