@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  APIHost: 'https://sac-cms.crontiers.com'
 };

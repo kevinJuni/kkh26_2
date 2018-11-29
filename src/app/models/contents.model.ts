@@ -53,6 +53,14 @@ export class AssetFile {
     public purposes: string| string[]
   ) {}
 
+  get isListBanner (): boolean {
+    return this.purposes.length && 0 <= this.purposes.indexOf('banner');
+  }
+
+  get isDetailBanner (): boolean {
+    return this.purposes.length && 0 <= this.purposes.indexOf('header');
+  }
+
   static from (raw: any) {
     return new AssetFile(raw.id, raw.content_type,
       raw.name, raw.length, raw.purposes);

@@ -9,7 +9,8 @@
 
 
 <div mat-dialog-actions align="end">
-  <button mat-raised-button color="primary" [disabled]="editor.editor.invalid" (click)="submit()">
+  <button mat-raised-button color="primary" (click)="submit()"
+    [disabled]="editor.editor.invalid || posting" >
     {{'Common.Confirm'|translate}}
   </button>
   <button mat-raised-button color="warn"

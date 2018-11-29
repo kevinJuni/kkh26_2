@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { NgbPaginationConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from './services/auth.service';
 import { environment } from 'environments/environment';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-//import { ManagerEditorComponent } from './manager-editor/manager-editor.component';
+import { CommonAlertComponent } from './dialog-components/common-alert/common-alert.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -17,9 +17,9 @@ export class AppComponent {
 
   constructor (
     private router: Router,
-    private modals: NgbModal,
-    private auth: AuthService,
+    private dialog: MatDialog,
     private translate: TranslateService,
+    private auth: AuthService,
   ) {
     translate.setDefaultLang('en');
     translate.use('ko');
@@ -34,12 +34,14 @@ export class AppComponent {
   }
 
   logout () {
-    this.auth.logout();
+    this.auth.logout()
+    .subscribe(res => this.router.navigate(['/login']), this.onError.bind(this));
   }
 
-  editProfile () {
-//    let dialog = this.modals.open(ManagerEditorComponent, {size: 'sm'});
-//    dialog.componentInstance.bind(this.me);
-
+  onError () {
+    this.dialog.open(CommonAlertComponent, {
+      width: '250px',
+      data: {title: '오류', prompt: '로그인 중 오류가 발생했습니다.'}
+    });
   }
 }

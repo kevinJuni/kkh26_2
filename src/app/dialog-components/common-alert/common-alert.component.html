@@ -2,6 +2,8 @@
 <div mat-dialog-content>
   <p>{{data.prompt}}</p>
 </div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="end">
+  <button mat-raised-button mat-dialog-close color="primary" cdkFocusInitial>
+    {{'Common.Confirm'|translate}}
+  </button>
 </div>

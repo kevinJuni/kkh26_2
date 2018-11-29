@@ -19,6 +19,7 @@ export class ContentDetailComponent implements OnInit {
   content: Content;
 
   modeNew: boolean = true;
+  posting: boolean = false;
 
   constructor(
     private contents: ContentsService,
@@ -81,12 +82,14 @@ export class ContentDetailComponent implements OnInit {
         if (selection !== 'yes') {
           return;
         }
+        this.posting = true;
         this.editor.submit().subscribe(
           this.onPostingComplete.bind(this),
           this.onError.bind(this)
         );
       });
     } else {
+      this.posting = true;
       this.editor.submit().subscribe(
         this.onPostingComplete.bind(this),
         this.onError.bind(this)

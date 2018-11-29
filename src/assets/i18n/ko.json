@@ -29,7 +29,7 @@
     },
     "AssetPurposes": {
       "ListingBanner": "리스트 배너",
-      "HeaderBanner": "디테일 뷰 헤더"
+      "DetailBanner": "디테일 헤더 배너"
     }
   },
   "FileUploader": {

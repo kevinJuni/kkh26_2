@@ -24,9 +24,6 @@ import { CustomMaterialModule } from './custom-material/custom-material.module';
 
 // services
 import { CommonBackendService } from './services/backend.service';
-import { MemberService } from './services/member.service';
-import { AdService } from './services/ad.service';
-import { LocalizedTextService } from './services/localized-text.service';
 import { DistrictSearchService } from './services/district-search.service';
 import { TokenInterceptor } from './services/token-intercepter';
 import { AuthService } from './services/auth.service';
@@ -116,7 +113,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       { path: 'login', component: EntranceComponent },
       { path: 'contents', component: ContentsManagerComponent },
       { path: 'contents-categories', component: CategoryManagerComponent },
-      {path: '**', component: ContentEditorComponent}
+      {path: '**', component: ContentsManagerComponent}
     ]),
     NgxUploaderModule,
     TextMaskModule,

@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  APIHost: 'http://localhost:5000'
+  APIHost: 'https://sac-cms.crontiers.com'
 };

@@ -8,7 +8,10 @@
     <p mat-line>{{item.length| humanizeBytes}}</p>
     <mat-icon mat-list-icon color="accent"
       matTooltip="{{'ContentEditor.AssetPurposes.ListingBanner'|translate}}"
-      *ngIf="item.purposes.length">list_alt</mat-icon>
+      *ngIf="item.isListBanner">ballot</mat-icon>
+    <mat-icon mat-list-icon color="accent"
+      matTooltip="{{'ContentEditor.AssetPurposes.DetailBanner'|translate}}"
+      *ngIf="item.isDetailBanner">subtitles</mat-icon>
     <button mat-icon-button color="warn" (click)="remove(item)"
       matTooltip="{{'Common.Remove'|translate}}" matTooltipPosition="right">
       <mat-icon>remove</mat-icon>

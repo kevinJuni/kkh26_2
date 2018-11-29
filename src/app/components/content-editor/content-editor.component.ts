@@ -35,7 +35,7 @@ export class ContentEditorComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.uploader.purposeOptions = {
       banner: 'ContentEditor.AssetPurposes.ListingBanner',
-      header: 'ContentEditor.AssetPurposes.HeaderBanner'
+      header: 'ContentEditor.AssetPurposes.DetailBanner'
     };
     this.backend.getCategories().subscribe(res => {
       this.categories = res.items;

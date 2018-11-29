@@ -1,10 +1,10 @@
-<mat-toolbar>
+<mat-toolbar *ngIf="displayMenu">
   <span>{{'ApplicationTitle'|translate}}</span>
 
   <button mat-button routerLink="/contents">{{'Navi.ContentsManager'|translate}}</button>
   <button mat-button [matMenuTriggerFor]="settings">{{'Navi.SettingsManager'|translate}}</button>
   
-  <button mat-stroked-button color="warn">{{'Navi.SignOut'|translate}}</button>
+  <button mat-stroked-button color="warn" (click)="logout()">{{'Navi.SignOut'|translate}}</button>
 
   <mat-menu #settings="matMenu">
     <button mat-menu-item routerLink="/contents-categories">{{'Navi.CategoryManager'|translate}}</button>

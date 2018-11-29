@@ -7,6 +7,7 @@ import {
 import { environment } from 'environments/environment';
 import { Subject } from 'rxjs';
 import { AssetFile } from 'app/models';
+import { AuthService } from 'app/services/auth.service';
 
 @Component({
   selector: 'app-file-drop',
@@ -28,11 +29,13 @@ export class FileDropComponent {
   @Output()
   progress: EventEmitter<UploadFile> = new EventEmitter<UploadFile>();
 
-  constructor() {
+  constructor(
+    private auth: AuthService
+  ) {
     this.options = { concurrency: 10 };
     this.files = [];
     this.uploadInput = new EventEmitter<UploadInput>();
-    this.humanizeBytes = humanizeBytes;    
+    this.humanizeBytes = humanizeBytes;
   }
 
   purposeOptions = {};
@@ -76,7 +79,8 @@ export class FileDropComponent {
     const event: UploadInput = {
       type: 'uploadAll',
       url: `${environment.APIHost}/assets`,
-      method: 'POST'
+      method: 'POST',
+      headers: this.auth.authorizationHeader
     };
 
     var list = this.files.map(e => {

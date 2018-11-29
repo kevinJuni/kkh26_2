@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient, HttpInterceptor, HttpRequest, HttpHandler, HttpEvent
-} from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map, catchError} from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { map} from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
-import { Router } from '@angular/router';
 import { Manager } from './manager.service';
 
 
@@ -16,15 +12,14 @@ const STORAGE_KEY_USER = 'currentUser';
 
 @Injectable()
 export class AuthService {
-  private baseURI = '/managers/auth'
+  private baseURI = '/auth'
   constructor(
     private http: HttpClient,
-    private router: Router,
   ) { }
 
   login (username: string, password: string) {
-    let uri = `${environment.APIHost}${this.baseURI}`;
-    let body = { id: username, password: password };
+    let uri = `${environment.APIHost}${this.baseURI}/login`;
+    let body = { username: username, password: password };
     return this.http.post(uri, body).pipe(
       map(res => {
         if (res && res['token']) {
@@ -57,12 +52,22 @@ export class AuthService {
     return Manager.from(data);
   }
 
-  logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem(STORAGE_KEY);
-    localStorage.removeItem(STORAGE_KEY_USER);
-    this.router.navigate(['/login'])
+  get authorizationHeader () {
+    return this.getAuthorizationHeader();
+  }
 
+  logout() {
+    let uri = `${environment.APIHost}${this.baseURI}/logout`;
+
+    return this.http.get(uri).pipe(
+      map(res => {
+        // remove user from local storage to log user out
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(STORAGE_KEY_USER);
+
+        return res;
+      })
+    );
   }
 
 
