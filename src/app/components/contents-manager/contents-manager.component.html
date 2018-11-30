@@ -14,19 +14,18 @@
 </mat-paginator>
 
 <div fxLayout="row wrap">
-  <mat-card class="contents-card" (click)="showEditor(item)"
-    fxlayout="column" fxlayoutalign="center center"
-    *ngFor="let item of list.items">
-    <img mat-card-image
-      [src]="item.banner"
-      alt="contents title" />
+  <mat-card class="contents-card"
+    *ngFor="let item of list.items"
+    mat-ripple (click)="showEditor(item)"
+    matTooltip="{{item.title}}"
+    fxlayout="row" fxlayoutalign="center center">
+    <img mat-card-image [src]="item.banner" *ngIf="item.banner" />
   </mat-card>
 
-  <mat-card class="contents-card" matTooltip="{{'ContentEditor.Register'|translate}}">
-    <mat-card-content fxFill fxLayoutAlign="center">
-      <button mat-button (click)="showEditor()">
-        <fa-icon icon="plus" size="4x"></fa-icon>
-      </button>
+  <mat-card class="contents-card" (click)="showEditor()"
+    matTooltip="{{'ContentEditor.Register'|translate}}">
+    <mat-card-content mat-ripple fxFill fxLayoutAlign="center center">
+      <fa-icon icon="plus" size="4x"></fa-icon>
     </mat-card-content>
   </mat-card>
 </div>

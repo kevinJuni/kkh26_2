@@ -37,6 +37,9 @@ export class ContentsManagerComponent implements OnInit {
   }
 
   onError (error) {
+    if (error.status === 401) {
+      return; // this error will be controlled by interceptor.
+    }
     this.translate.get('Alert.CommonError').subscribe(errorMsg => {
       this.toaster.error(errorMsg, 'error!');
       console.error(error);

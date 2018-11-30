@@ -3,12 +3,27 @@
   font-size: 12pt;
   background-color: #303030;
 }
+
+mat-card {
+  padding: 0;
+}
+
 .contents-card {
   margin: .5rem;
-  width: 15rem;
+  width: 300px;
+  height: 160px;
 }
 
 .contents-card img {
-  width: 15rem;
-  height: 8rem;
+  width: 100%;
+  height: 100%;
+}
+
+.mat-card-image {
+  margin: 0;
+}
+
+.mat-card-image:first-child {
+  margin-top: 0;
+  border-radius: inherit;
 }
