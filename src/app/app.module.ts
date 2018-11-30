@@ -30,12 +30,6 @@ import { AuthService } from './services/auth.service';
 
 // pipes
 import { Nl2brPipe } from './pipes//nl2br.pipe';
-import { MemberStatusDescPipe } from './pipes/member-status-desc.pipe';
-import { PrinterStatusDescPipe } from './pipes/printer-status-desc.pipe';
-import { DeviceServiceStatusDescPipe } from './pipes/device-service-status-desc.pipe';
-import { PrinterColorCaptionPipe } from './pipes/printer-color-caption.pipe';
-import { PrinterOrientationCaptionPipe } from './pipes/printer-orientation-caption.pipe';
-import { ZeroPadPipe } from './pipes/zero-pad.pipe';
 import { EnumeratePipe } from './pipes/enumerate.pipe';
 
 
@@ -63,11 +57,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     Nl2brPipe,
-    MemberStatusDescPipe,
-    PrinterStatusDescPipe,
-    DeviceServiceStatusDescPipe,
-    PrinterColorCaptionPipe,
-    PrinterOrientationCaptionPipe,
     EnumeratePipe,
 
     EntranceComponent,
@@ -125,7 +114,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
     ContentsService,
 
-    Nl2brPipe, EnumeratePipe, ZeroPadPipe,
+    Nl2brPipe, EnumeratePipe,
     {provide: LocationStrategy, useClass: HashLocationStrategy},
     {provide: LOCALE_ID, useValue: 'ko'},
     {
