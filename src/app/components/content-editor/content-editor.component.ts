@@ -51,12 +51,12 @@ export class ContentEditorComponent implements OnInit, OnDestroy {
     this.editor = this.fb.group({
       id: '',
       category: ['', Validators.required],
-      title: ['', Validators.required],
-      author: ['', Validators.required],
+      title: [''],
+      author: [''],
       recordedAt: [''],
       recordedLocation: '',
-      description: ['', Validators.required],
-      runningTime: [0, Validators.required],
+      description: [''],
+      runningTime: [0],
       length: 0,
       assets: [[]]
     });
@@ -76,6 +76,8 @@ export class ContentEditorComponent implements OnInit, OnDestroy {
       return;
 
     var model = Content.from(this.editor.value);
+    this.editor.disable();
+    this.uploader.setDisabledState(true);
 
     return this.backend.verifyContent(model).pipe(
       switchMap(res => {
@@ -106,6 +108,16 @@ export class ContentEditorComponent implements OnInit, OnDestroy {
   updateTotalSize($event) {
     let output = humanizeBytes($event);
     this.editor.controls.length.setValue(output);
+  }
+
+  setDisabledState(value: boolean) {
+    if (value) {
+      this.editor.disable();
+    }
+    else {
+      this.editor.enable();
+    }
+    this.uploader.setDisabledState(value);
   }
 
 }

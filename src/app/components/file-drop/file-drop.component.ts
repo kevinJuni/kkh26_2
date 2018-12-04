@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import {
   UploadOutput, UploadInput, UploadFile,
   humanizeBytes, UploaderOptions, UploadStatus
@@ -28,6 +28,9 @@ export class FileDropComponent {
 
   @Output()
   progress: EventEmitter<UploadFile> = new EventEmitter<UploadFile>();
+
+  @ViewChild('fileSelector')
+  fileSelector;
 
   constructor(
     private auth: AuthService
@@ -117,7 +120,10 @@ export class FileDropComponent {
 
     var sub = <Subject<AssetPostingResponse>>file.sub;
     if (sub) {
-      sub.next(AssetPostingResponse.from(file.response, this.filePurposes[file.id]));
+      if (file.response)
+        sub.next(AssetPostingResponse.from(file.response, this.filePurposes[file.id]));
+      else
+        sub.next(AssetPostingResponse.failed());
       sub.complete();
     }
     file.sub = null;
@@ -129,6 +135,15 @@ export class FileDropComponent {
 
   removePurpose (file: UploadFile, purpose) {
     this.filePurposes[file.id].splice(purpose, 1);
+  }
+
+  isModifiable(file: UploadFile): boolean {
+    return file.progress.status != UploadStatus.Uploading;
+  }
+
+  setDisabledState(isDisabled: boolean) {
+    this.fileSelector.nativeElement.disabled = isDisabled;
+
   }
 }
 
@@ -145,7 +160,8 @@ export class AssetPostingResponse {
   }
 
   static from (raw: any, purposes?: string[]) {
-    raw.purposes = purposes;
+    if (raw.response)
+      raw.purposes = purposes;
     return new AssetPostingResponse(raw.response, true, AssetFile.from(raw));
   }
 }

@@ -37,7 +37,8 @@ export class Content implements NumericIdentifier {
     return new Content(raw.id,
       raw.category instanceof Object ? Category.from(raw.category) : raw.category,
       raw.title, raw.author, raw.description,
-      new Date(raw.recordedAt), raw.recordedLocation,
+      raw.recordedAt? new Date(raw.recordedAt) : null,
+      raw.recordedLocation,
       raw.runningTime, raw.length,
       raw.assets? raw.assets.map(AssetFile.from) : []);
   }

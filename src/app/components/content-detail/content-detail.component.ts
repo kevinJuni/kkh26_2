@@ -48,10 +48,12 @@ export class ContentDetailComponent implements OnInit {
   }
 
   onError (error) {
+    this.posting = false;
+    this.editor.setDisabledState(false);
     this.translate.get('Alert.CommonError').subscribe(errorMsg => {
       this.toaster.error(errorMsg, 'error!');
       console.error(error);
-    });   
+    });
   }
   
   remove () {

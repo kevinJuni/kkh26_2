@@ -6,7 +6,8 @@
         {{'FileUploader.Hint.DragAndDrop'|translate}} or
         <label class="upload-button">
           <fa-icon icon="folder-open"></fa-icon>
-          <input type="file" ngFileSelect [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" multiple>
+          <input type="file" ngFileSelect #fileSelector
+            [options]="options" (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploadInput" multiple>
           {{'Common.Browse'|translate}}
         </label>
       </p>
@@ -16,7 +17,9 @@
         <div class="filename" fxlayout="row">
           <mat-icon>file_copy</mat-icon>
           <span>{{ f.name }}</span>
-          <button mat-icon-button color="warn" (click)="drop(f?.id)">
+          <button mat-icon-button color="warn"
+            *ngIf="isModifiable(f)"
+            (click)="drop(f?.id)">
             <mat-icon>backspace</mat-icon>
           </button>
           <div *ngFor="let idx of filePurposes[f.id]; let i = index">
@@ -34,6 +37,7 @@
             </button>
           </div>
           <button mat-icon-button color="primary"
+            *ngIf="isModifiable(f)"
             (click)="addPurpose(f)"
             matTooltip="용도 추가" matTooltipPosition="above">
             <mat-icon>add</mat-icon>

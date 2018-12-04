@@ -32,6 +32,13 @@ export class RunningTimeComponent implements ControlValueAccessor {
 
   registerOnTouched () {}
 
+  setDisabledState(isDisabled: boolean) {
+    if (isDisabled)
+      this.form.disable();
+    else
+      this.form.enable();
+  }
+
   update ($event) {
     let model = TimeDuration.from(this.form.value);
     this.propagateChange(model.asSeconds);

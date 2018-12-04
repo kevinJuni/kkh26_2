@@ -56,7 +56,8 @@ export function toSnakeCaseDict (data) {
       continue;
 
     if (data[field] instanceof Date) {
-      out[toSnakeCase(field)] = (<Date>data[field]).toISOString();
+      if (!isNaN(data[field]))
+        out[toSnakeCase(field)] = (<Date>data[field]).toISOString();
     } else if (typeof data[field] == 'object' && !Array.isArray(data[field])) {
       out[toSnakeCase(field)] = toSnakeCaseDict(data[field])
     } else {
