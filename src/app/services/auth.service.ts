@@ -4,6 +4,7 @@ import { map} from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { Manager } from './manager.service';
+import { store } from '@angular/core/src/render3';
 
 
 const STORAGE_KEY = 'currentToken';
