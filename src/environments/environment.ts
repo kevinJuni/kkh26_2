@@ -5,6 +5,6 @@
 
 export const environment = {
   production: false,
-  APIHost: 'http://localhost:5000',
-  AssetHost: 'http://localhost:5000'
+  APIHost: 'https://vravi-cms.crontiers.com',
+  AssetHost: 'https://vravi-cms.crontiers.com'
 };

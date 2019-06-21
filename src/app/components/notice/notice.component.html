@@ -1,0 +1,37 @@
+
+  <div class="mat-elevation-z8 notice_box">
+      <div class="notice_button_box">
+        <button class="notice_button" mat-raised-button (click)="openNoticeModal($event)">Notice 등록</button>
+      </div>
+    <table mat-table [dataSource]="dataSource">
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef  style="text-align: center; width:20%"> No. </th>
+        <td mat-cell style="text-align: center" *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="subject">
+        <th mat-header-cell *matHeaderCellDef  style="text-align: center; width:30%"> Subject </th>
+        <td mat-cell style="text-align: center" *matCellDef="let element"> {{element.subject}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef  style="text-align: center; width:30%"> Created </th>
+          <td mat-cell style="text-align: center" *matCellDef="let element"> {{element.created_at | date:"yyyy년 MM월 dd일 hh시 mm분 ss초":"+18:00" }} </td>
+        </ng-container>
+  
+      <ng-container matColumnDef="symbol">
+        <th mat-header-cell *matHeaderCellDef style="text-align: center; width:20%"> Delete </th>
+        <td class="removeBtn" mat-cell style="text-align: center" *matCellDef="let element" (click)="openNoticeRemove(element)">
+          <button color="warn" mat-raised-button>삭제</button>  
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"  style="text-align: center; width:20%"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openNoticeModal(row)"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </div>

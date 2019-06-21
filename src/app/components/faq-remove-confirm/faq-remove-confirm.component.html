@@ -1,0 +1,12 @@
+<div class="removeBox">
+  <h1>확인</h1>
+ <div mat-dialog-content class="ok_box">
+    <p>
+      삭제 하시겠습니까? : {{data.subject}}
+    </p>
+  </div>
+  <div mat-dialog-actions class="removeBtnbox">
+    <button  mat-raised-button color="warn" class="removeBtn" mat-button [mat-dialog-close]="data.ok" >삭제</button>
+    <button mat-raised-button class="removeBtn" mat-button (click)="onNoClick()" cdkFocusInitial>취소</button>
+  </div>
+</div>

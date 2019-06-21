@@ -1,10 +1,17 @@
 .container {
-  margin: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .editor {
-  width: 400px;
+  width: 468px;
 }
-
+.addinput{
+  width:80%;
+}
+.addbtn{
+  width: 15%;
+  margin-left: 4%;
+}
 .example-list {
   width: 500px;
   max-width: 100%;

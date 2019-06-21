@@ -1,0 +1,22 @@
+<div id="box">
+  <div *ngIf="!isNew" >
+      <h1 mat-dialog-title>FAQ 수정</h1>
+  </div>
+  <div *ngIf="isNew" >
+      <h1 mat-dialog-title>FAQ 등록</h1>
+  </div>
+  <p>
+  <div mat-dialog-content>
+    <mat-form-field>
+      <input matInput [(ngModel)]="model.subject" placeholder="title">
+    </mat-form-field>
+    <mat-form-field class="textarea_box">
+      <textarea matInput [(ngModel)]="model.content" placeholder="content"></textarea>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">X</button>
+    <button *ngIf="isNew" [disabled]="canNotSubmit" mat-button [mat-dialog-close]="model" cdkFocusInitial>등록</button>
+    <button *ngIf="!isNew" [disabled]="canNotSubmit" mat-button [mat-dialog-close]="model" cdkFocusInitial>수정</button>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+table {
+    width: 100%;
+    margin: 0 auto;
+  }
+/* th , td{
+    background: #eee;
+}
+.center{
+    text-align: center;
+} */
+.faq_box{
+    margin: 0 auto;
+    width: 90%;
+    margin-top:10%;
+    background: none;
+    box-shadow:none;
+}
+.faq_button_box{
+    width: 100%;
+    text-align: right;
+    margin-bottom: 20px;
+}
+.faq_button{
+    
+}
+.removeBtn>button{
+    text-align: center;    
+}
+th{
+    font-size: 18px;
+}

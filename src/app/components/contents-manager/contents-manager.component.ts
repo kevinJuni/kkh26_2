@@ -59,6 +59,7 @@ export class ContentsManagerComponent implements OnInit {
   showEditor (item?: ContentBrief) {
     const dialog = this.dialogs.open(ContentDetailComponent, {
       width: '50vw',
+      minWidth:'700px',
       disableClose: true,
       data: item || {}
     });

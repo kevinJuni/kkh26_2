@@ -1,0 +1,25 @@
+.mat-dialog-content{
+    width: 300px;
+    text-align: center;
+}
+h1{
+    font: 500 20px/32px Roboto,"Helvetica Neue",sans-serif;
+    margin-bottom: 20px;
+}
+.removeBtn:nth-child(1){
+    min-width: 64px;
+    background: #c2185b;
+    
+}
+.ok_box{
+    text-align: left;
+}
+.removeBtn:nth-child(2){
+}
+.removeBtn{
+    margin-bottom: 10px;
+}
+.removeBtnbox{
+    max-height: 100%;
+    place-content: stretch flex-end;
+}

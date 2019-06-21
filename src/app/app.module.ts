@@ -5,8 +5,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import {
-  LocationStrategy, HashLocationStrategy, registerLocaleData
+  LocationStrategy, HashLocationStrategy, registerLocaleData, CommonModule
 } from '@angular/common';
+import localeKo from '@angular/common/locales/ko'
+registerLocaleData(localeKo)
 import {ToastrModule } from 'ngx-toastr';
 
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
@@ -48,6 +50,16 @@ import { FileDropComponent } from './components/file-drop/file-drop.component';
 import { AssetListComponent } from './components/asset-list/asset-list.component';
 import { HumanizeBytesPipe } from './pipes/humanize-bytes.pipe';
 import { RunningTimeComponent } from './components/running-time/running-time.component';
+import { FaqComponent } from './components/faq/faq.component';
+import { FaqModalComponent } from './components/faq-modal/faq-modal.component';
+
+
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { PostManagerService } from './services/post-manager.service';
+import { FaqRemoveConfirmComponent } from './components/faq-remove-confirm/faq-remove-confirm.component';
+import { NoticeComponent } from './components/notice/notice.component';
+import { NoticeModalComponent } from './components/notice-modal/notice-modal.component';
+import { NoticeRemoveConfirmComponent } from './components/notice-remove-confirm/notice-remove-confirm.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -58,7 +70,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     Nl2brPipe,
     EnumeratePipe,
-
     EntranceComponent,
     DashboardComponent,
     ContentsManagerComponent,
@@ -72,14 +83,26 @@ export function HttpLoaderFactory(http: HttpClient) {
     AssetListComponent,
     HumanizeBytesPipe,
     RunningTimeComponent,
+    FaqComponent,
+    FaqModalComponent,
+    FaqRemoveConfirmComponent,
+    NoticeComponent,
+    NoticeModalComponent,
+    NoticeRemoveConfirmComponent,
   ],
   entryComponents: [
     CommonAlertComponent,
     BinarySelectComponent,
     ContentDetailComponent,
     ContentEditorComponent,
+    FaqModalComponent,
+    FaqRemoveConfirmComponent,
+    NoticeModalComponent,
+    NoticeRemoveConfirmComponent
   ],
   imports: [
+    CommonModule,
+    NgbModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
@@ -102,7 +125,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       { path: 'login', component: EntranceComponent },
       { path: 'contents', component: ContentsManagerComponent },
       { path: 'contents-categories', component: CategoryManagerComponent },
-      {path: '**', component: ContentsManagerComponent}
+      { path: 'faq', component: FaqComponent },
+      { path: 'notice', component: NoticeComponent },
+      { path: '**', component: ContentsManagerComponent }
     ]),
     NgxUploaderModule,
     TextMaskModule,
@@ -111,8 +136,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     CommonBackendService,
     AuthService,
     DistrictSearchService,
-
+    PostManagerService,
     ContentsService,
+    
 
     Nl2brPipe, EnumeratePipe,
     {provide: LocationStrategy, useClass: HashLocationStrategy},

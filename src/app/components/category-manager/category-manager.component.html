@@ -1,14 +1,14 @@
 <div class="container" fxLayout="column" fxLayoutAlign="center center">
 <mat-card>
   <mat-card-content class="editor" fxLayout="row" fxlayoutalign="center center">
-    <form class="editor">
-      <mat-form-field>
+    <form class="editor" >
+      <mat-form-field class="addinput">
         <mat-label>{{'ContentEditor.Labels.Category'|translate}}</mat-label>
         <input matInput [formControl]="editor">
       </mat-form-field>
-      <button mat-stroked-button (click)="add()">{{'Common.Add'|translate}}</button>  
+      <button  *ngIf="!inAction" mat-stroked-button class="addbtn" (click)="add()">{{'Common.Add'|translate}}</button>  
     </form>
-    <mat-spinner diameter="20" *ngIf="inAction"></mat-spinner>
+    <mat-spinner diameter="50" *ngIf="inAction"></mat-spinner>
     
   </mat-card-content>
 </mat-card>

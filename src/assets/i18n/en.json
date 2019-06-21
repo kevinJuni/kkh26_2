@@ -8,6 +8,8 @@
     "SettingsManager": "Settings",
     "CategoryManager": "Contents Categories",
     "ManagersManager": "Managers",
+    "FAQManager": "FAQ",
+    "NoticeManager": "Notice",
     "SignOut": "Sign Out"
   }
 }

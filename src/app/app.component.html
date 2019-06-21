@@ -3,7 +3,9 @@
 
   <button mat-button routerLink="/contents">{{'Navi.ContentsManager'|translate}}</button>
   <button mat-button [matMenuTriggerFor]="settings">{{'Navi.SettingsManager'|translate}}</button>
-  
+  <button mat-button routerLink="/faq">{{'Navi.FAQManager'|translate}}</button>
+  <button mat-button routerLink="/notice">{{'Navi.NoticeManager'|translate}}</button>
+
   <button mat-stroked-button color="warn" (click)="logout()">{{'Navi.SignOut'|translate}}</button>
 
   <mat-menu #settings="matMenu">

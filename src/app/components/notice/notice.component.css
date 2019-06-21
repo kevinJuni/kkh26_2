@@ -1,0 +1,31 @@
+table {
+    width: 100%;
+    margin: 0 auto;
+  }
+/* th , td{
+    background: #eee;
+}
+.center{
+    text-align: center;
+} */
+.notice_box{
+    margin: 0 auto;
+    width: 90%;
+    margin-top:10%;
+    background: none;
+    box-shadow:none;
+}
+.notice_button_box{
+    width: 100%;
+    text-align: right;
+    margin-bottom: 20px;
+}
+.notice_button{
+    
+}
+.removeBtn>button{
+    text-align: center;    
+}
+th{
+    font-size: 18px;
+}

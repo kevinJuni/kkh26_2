@@ -25,7 +25,7 @@ import {
   MatDividerModule,
   MatTooltipModule,
   MatPaginatorModule,
-  MatButtonModule, MatCheckboxModule
+  MatButtonModule, MatCheckboxModule,MatTableModule
 } from '@angular/material';
 
 @NgModule({
@@ -45,7 +45,7 @@ import {
     MatTooltipModule,
     MatPaginatorModule,
     MatButtonModule, MatCheckboxModule,
-    DragDropModule, ScrollDispatchModule,
+    DragDropModule, ScrollDispatchModule,MatTableModule
   ],
 })
 export class CustomMaterialModule { }
