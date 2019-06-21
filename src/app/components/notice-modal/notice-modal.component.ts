@@ -28,31 +28,15 @@ export class NoticeModalComponent implements OnInit {
       this.isNew = true;
     }
   }
-form:FormGroup
   constructor(
     private posts: PostManagerService,
-    public fb: FormBuilder,
     public dialogRef: MatDialogRef<NoticeModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Post)
-  {
-    this.makeForm()
-  }
+    @Inject(MAT_DIALOG_DATA) public data: Post) {}
 
- 
-
-  makeForm(){
-    this.form = this.fb.group({
-      subject: [this.data.subject, [Validators.required]],
-      content: [this.data.content, [Validators.required]],
-    })  
-  }
   get canNotSubmit() {
     return this.model.subject === '' || this.model.content === '' 
   }
   onNoClick(): void {
     this.dialogRef.close();
   }
-  
-
-
 }

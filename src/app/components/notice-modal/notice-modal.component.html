@@ -1,26 +1,3 @@
-<!-- <div id="box">
-    <div *ngIf="!data.state" >
-        <h1 mat-dialog-title>Notice 수정</h1>
-    </div>
-    <div *ngIf="data.state" >
-        <h1 mat-dialog-title>Notice 등록</h1>
-    </div>
-    <p>
-    <form mat-dialog-content [formGroup]="form">
-      <mat-form-field>
-        <input formControlName="subject"  matInput placeholder="title" [(value)]="form.value.subject">
-      </mat-form-field>
-      <mat-form-field class="textarea_box">
-        <textarea formControlName="content"  matInput placeholder="content" [(value)]="form.value.content"></textarea>
-      </mat-form-field>
-    </form>
-    <div mat-dialog-actions>
-      <button mat-button (click)="onNoClick()">X</button>
-      <button *ngIf="isNew" mat-button [mat-dialog-close]="form.value" [disabled]="form.invalid" cdkFocusInitial>등록</button>
-      <button *ngIf="!data.state" [disabled]="form.value.content === '' || form.value.subject === '' " mat-button [mat-dialog-close]="form.value" cdkFocusInitial>수정</button>
-    </div>
-  </div> -->
-
   <div id="box">
       <div *ngIf="!isNew" >
           <h1 mat-dialog-title>Notice 수정</h1>
